@@ -75,9 +75,32 @@ void batteryBank::FindHighestDigits()
         } 
         else
         {
-            //check the next highest... and the next...
+            //check the next highest, and the next, until you
+            //pass the current index
+            BackCheck(highestDigit, i);
         }
     }
+}
+
+void batteryBank::BackCheck(int highestDigit, int currentIndex)
+{
+    if(indices[highestDigit] > currentIndex)
+    {
+        return;
+    }
+
+    int currentDigit            = digitBank[currentIndex];
+
+    int previousHighestIndex    = indices[highestDigit];
+    int previousHighest         = digitBank[previousHighestIndex];
+
+    if(currentDigit > previousHighest)
+    {
+        PromoteToNextDigit(currentIndex, highestDigit);
+        return;
+    }
+
+    BackCheck(highestDigit + 1, currentIndex);
 }
 
 //Takes in the first "new highest digit". Recursively places each other digit

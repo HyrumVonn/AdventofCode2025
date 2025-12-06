@@ -16,6 +16,7 @@ class batteryBank
     int* digitBank;
 
     void    FindHighestDigits();
+    void    BackCheck(int, int);
     void    PromoteToNextDigit(int, int);
     int     ParseDigitsToInt();
 
