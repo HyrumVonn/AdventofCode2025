@@ -25,9 +25,9 @@ void batteryBank::ParseString(std::string input)
     }
 }
 
-int batteryBank::MaxJoltage()
+uint64_t batteryBank::MaxJoltage()
 {
-    int result = 0;
+    uint64_t result = 0;
 
     //find digits
     FindHighestDigits();
@@ -62,15 +62,15 @@ void batteryBank::FindHighestDigits()
         int previousHighestIndex    = indices[highestDigit];
         int previousHighest         = digitBank[previousHighestIndex];
 
-        std::cout << "Comparing " << currentDigit << " (" << i;
-        std::cout << ") against " <<previousHighest  << " (";
-        std::cout << previousHighestIndex << ") at [" << highestDigit << "]" <<std::endl;
+        ////std::cout << "Comparing " << currentDigit << " (" << i;
+        ////std::cout << ") against " <<previousHighest  << " (";
+        ////std::cout << previousHighestIndex << ") at [" << highestDigit << "]" <<std::endl;
         //if the current digit is higher than the furthest digit we can go
         //back, then set that digit to it, and set every following digit 
         //to the right
         if(currentDigit > previousHighest)
         {
-            std::cout << " Yes!Begin Promotion:" << std::endl;
+            ////std::cout << " Yes!Begin Promotion:" << std::endl;
             PromoteToNextDigit(i, highestDigit);
         } 
         else
@@ -107,12 +107,12 @@ void batteryBank::BackCheck(int highestDigit, int currentIndex)
 //immediately to the right of the new highest digit
 void batteryBank::PromoteToNextDigit(int currentIndex, int digitNumber)
 {
-    std::cout << "\tPromoting " << digitBank[currentIndex] << " (" << currentIndex;
-    std::cout << ") to digit number " <<digitNumber  << " (previously ";
-    std::cout << digitBank[indices[digitNumber]] << ")" << std::endl;
+    ////std::cout << "\tPromoting " << digitBank[currentIndex] << " (" << currentIndex;
+    ////std::cout << ") to digit number " <<digitNumber  << " (previously ";
+    ////std::cout << digitBank[indices[digitNumber]] << ")" << std::endl;
     if((digitNumber >= NUM_INDICES) || (currentIndex > inputSize - 1))
     {
-        std::cout << "ERRR! Promotion rejected" << std::endl;
+        ////std::cout << "ERRR! Promotion rejected" << std::endl;
         return;
     }
 
@@ -123,32 +123,29 @@ void batteryBank::PromoteToNextDigit(int currentIndex, int digitNumber)
     PromoteToNextDigit(currentIndex, digitNumber);
 }
 
-int batteryBank::ParseDigitsToInt()
+uint64_t batteryBank::ParseDigitsToInt()
 {
-    int result = 0;
-
-    std::cout << "Current indices of digits:" << std::endl;
+    uint64_t result = 0;
 
     for(int i = 0; i < NUM_INDICES; i++)
     {
-        std::cout << indices[i] << " ";
-        result *= 10;
-        result += indices[i];
+        result *= (uint64_t) 10;
+        result += (uint64_t) digitBank[indices[i]];
     }
 
-    std::cout << std::endl;
 
-
-    std::cout << "And associated Digits:" << std::endl;
+   //std::cout << "And associated Digits:" << std::endl;
 
     for(int i = 0; i < NUM_INDICES; i++)
     {
-        std::cout << digitBank[indices[i]];
+       //std::cout << digitBank[indices[i]];
         //result *= 10;
         //result += indices[i];
     }
 
-    std::cout << std::endl;
+   //std::cout << std::endl;
+
+   //std::cout << "Final result is: " << result << std::endl;
 
     return result;
 }

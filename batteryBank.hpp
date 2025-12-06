@@ -1,5 +1,6 @@
 #include <string>
 #include <stdlib.h>
+#include <cstdint>
 
 #ifndef __BATTERY_BANK__
 #define __BATTERY_BANK__
@@ -18,7 +19,7 @@ class batteryBank
     void    FindHighestDigits();
     void    BackCheck(int, int);
     void    PromoteToNextDigit(int, int);
-    int     ParseDigitsToInt();
+    uint64_t     ParseDigitsToInt();
 
 public:
     batteryBank();
@@ -26,7 +27,7 @@ public:
 
     void    ParseString(std::string);
 
-    int     MaxJoltage();
+    uint64_t     MaxJoltage();
 };
 
 #endif

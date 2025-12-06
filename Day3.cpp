@@ -29,12 +29,12 @@ int main()
     //while (input = true)
     string input = "";
 
-    int maxJoltage = 0;
+    uint64_t maxJoltage = 0;
 
     while (iFile >> input)
     {        
         batteryBank bank;
-        
+
         bank.ParseString(input);
 
         maxJoltage += bank.MaxJoltage();
