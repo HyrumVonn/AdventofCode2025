@@ -4,20 +4,19 @@
 #ifndef __BATTERY_BANK__
 #define __BATTERY_BANK__
 
+#define NUM_INDICES 12
+
 
 class batteryBank
 {
-    int tensIndex;
-    int onesIndex;
-
-    int highestTens;
-    int highestOnes;
-
     int inputSize;
+
+    int* indices;
 
     int* digitBank;
 
     void    FindHighestDigits();
+    void    PromoteToNextDigit(int, int);
     int     ParseDigitsToInt();
 
 public:
