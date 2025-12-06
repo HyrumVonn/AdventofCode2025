@@ -38,26 +38,27 @@ void batteryBank::FindHighestDigits()
 {
     //initialize tens and ones, such that it will always start
     //with 10s being the first digit, and 1s being the second
-    highestTens = -1;
-    highestOnes = -1;
+    tensIndex = 0;
+    onesIndex = 1;
 
     //loop until end of digit bank
-    for(int i = 0; i < inputSize; i++)
+    for(int i = onesIndex; i < inputSize; i++)
     {
-        //if the current digit is higher than the tens...
-        //AND the current digit isn't the last digit...
-        if((digitBank[i] > highestTens) && (i < (inputSize - 1)))
+        //if the current digit is higher than the tens
+        //AND the current digit isn't the last digit (because we must
+        //have room for the ones to the right of the tens)
+        if((digitBank[i] > digitBank[tensIndex]) && (i < (inputSize - 1)))
         {
-            //set the current digit to the tens
-            //set the ones to the next digit after the tens
-            highestTens = digitBank[i];
-            highestOnes = digitBank[i + 1];
+            //promote the current digit to the tens digit
+            //promote the next digit to the ones digit
+            tensIndex = i;
+            onesIndex = i + 1;
         }
-        else if(digitBank[i] > highestOnes)
+        else if(digitBank[i] > digitBank[onesIndex])
         {
             //If not, then check whether the current digit is higher than
-            //the ones: if so, set the ones to that digit
-            highestOnes = digitBank[i];
+            //the ones: if so, promote current digit to the ones digit
+            onesIndex = i;
         }
     }
 }
@@ -66,7 +67,7 @@ int batteryBank::ParseDigitsToInt()
 {
     int result = 0;
 
-    result = highestTens * 10 + highestOnes;
+    result = digitBank[tensIndex] * 10 + digitBank[onesIndex];
 
     return result;
 }
