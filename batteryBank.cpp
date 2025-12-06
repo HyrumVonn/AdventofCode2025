@@ -1,7 +1,5 @@
 #include "batteryBank.hpp"
 
-#include <iostream>
-#include <ostream>
 
 batteryBank::batteryBank()
 {
@@ -62,15 +60,11 @@ void batteryBank::FindHighestDigits()
         int previousHighestIndex    = indices[highestDigit];
         int previousHighest         = digitBank[previousHighestIndex];
 
-        ////std::cout << "Comparing " << currentDigit << " (" << i;
-        ////std::cout << ") against " <<previousHighest  << " (";
-        ////std::cout << previousHighestIndex << ") at [" << highestDigit << "]" <<std::endl;
         //if the current digit is higher than the furthest digit we can go
         //back, then set that digit to it, and set every following digit 
         //to the right
         if(currentDigit > previousHighest)
         {
-            ////std::cout << " Yes!Begin Promotion:" << std::endl;
             PromoteToNextDigit(i, highestDigit);
         } 
         else
@@ -107,12 +101,8 @@ void batteryBank::BackCheck(int highestDigit, int currentIndex)
 //immediately to the right of the new highest digit
 void batteryBank::PromoteToNextDigit(int currentIndex, int digitNumber)
 {
-    ////std::cout << "\tPromoting " << digitBank[currentIndex] << " (" << currentIndex;
-    ////std::cout << ") to digit number " <<digitNumber  << " (previously ";
-    ////std::cout << digitBank[indices[digitNumber]] << ")" << std::endl;
     if((digitNumber >= NUM_INDICES) || (currentIndex > inputSize - 1))
     {
-        ////std::cout << "ERRR! Promotion rejected" << std::endl;
         return;
     }
 
@@ -132,20 +122,6 @@ uint64_t batteryBank::ParseDigitsToInt()
         result *= (uint64_t) 10;
         result += (uint64_t) digitBank[indices[i]];
     }
-
-
-   //std::cout << "And associated Digits:" << std::endl;
-
-    for(int i = 0; i < NUM_INDICES; i++)
-    {
-       //std::cout << digitBank[indices[i]];
-        //result *= 10;
-        //result += indices[i];
-    }
-
-   //std::cout << std::endl;
-
-   //std::cout << "Final result is: " << result << std::endl;
 
     return result;
 }
